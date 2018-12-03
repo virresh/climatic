@@ -1,5 +1,5 @@
-# ChatIT
-Chat Application
+# Climatic
+The Climate Application
 
 Setup instructions :
 ```
@@ -11,4 +11,4 @@ python app.py
 Now visit localhost:8080 
 The app will be live there.
 
-Currently deployed at https://chatitflask.herokuapp.com/
+Currently deployed at https://evsclimatic.herokuapp.com/
