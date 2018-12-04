@@ -9,7 +9,11 @@ from flask import Flask, render_template, request, session, escape
 import random
 import csv
 import urllib
+import pickle
 
+
+pickle_in = open("data","rb")
+original_data = pickle.load(pickle_in)
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'WHY_SO_MUCH_TORTURE?')
 
@@ -28,6 +32,11 @@ def home_page():
 
 @app.route('/<country>/<year>')
 def get_prediction(country, year):
+    # return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
+    country_data = original_data[country]
+    for yearc in country_data:
+        if(yearc==year):
+            return str(original_data[country][year])+" degree celsius for "+country+" for the "+str(year)
     return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
 
 port = int(os.getenv('VCAP_APP_PORT', 8080))
