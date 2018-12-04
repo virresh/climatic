@@ -19,6 +19,15 @@ for country in dict:
 
 # print(real_dict)
 # print(real_dict['India'])
+years=[1800,1900,1920,1950,2000,2005,2010,2013]
+yearwise_data={}
+for year in years:
+    i = str(year)
+    yearwise_data[i]={}
+    for country in real_dict:
+        if(i in real_dict[country]):
+            yearwise_data[i][country]=real_dict[country][i]
 
-with open('./data.json','w') as fp:
-    json.dump(real_dict, fp)
+# print(yearwise_data['2000'])
+with open('./yearwise_data.json','w') as fp:
+    json.dump(yearwise_data, fp)
