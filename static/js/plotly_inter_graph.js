@@ -8,7 +8,7 @@ Plotly.d3.csv('/'+x, function(err, rows){
               type: 'choropleth',
               locationmode: 'country names',
               locations: unpack(rows, 'location'),
-              z: unpack(rows, 'year'),
+              z: unpack(rows, 'temp'),
               text: unpack(rows, 'location'),
               autocolorscale: true
           }];

@@ -5,7 +5,7 @@ A simple chatting application made using flask backend and uses AJAX Polling
 import datetime
 import time
 import os
-from flask import Flask, render_template, request, session, escape, abort
+from flask import Flask, render_template, request, session, escape, abort, Response
 import random
 import csv
 import urllib
@@ -22,14 +22,22 @@ def home_page():
 
 @app.route('/<year>')
 def get_pred(year):
+    csv = "location,temp\n"
     try:
-        with open("../static/data_json/yearwise_CSV_{}".format(year)) as f:
+        SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+        with open(os.path.join(SITE_ROOT, "static/data_json", "yearwise_CSV_{}.json".format(year))) as f:
             data = json.load(f)
-    except:
+        for i in data:
+            csv += str(i['country'])+","+str(i['temp'])+"\n"
+        return Response(csv, mimetype='text/csv')
+        # print(csv)
+    except Exception as e:
+        print(e)
         # abort(404)
-        pass
+        print(year)
+        return "location,temp\nIndia,37.7\n"
+    
 
-    return "location,temp\nIndia,37.7\n"
 
 # @app.route('/<country>/<year>')
 # def get_prediction(country, year):
