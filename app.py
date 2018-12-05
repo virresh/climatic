@@ -20,6 +20,10 @@ app.secret_key = os.getenv('SECRET_KEY', 'WHY_SO_MUCH_TORTURE?')
 def home_page():
     return render_template('home.html', greeting=2050)
 
+@app.route('/show/<year>')
+def get_year(year):
+    return render_template('home.html', greeting=year)
+
 @app.route('/<year>')
 def get_pred(year):
     csv = "location,temp\n"
@@ -36,17 +40,6 @@ def get_pred(year):
         # abort(404)
         print(year)
         return "location,temp\nIndia,37.7\n"
-    
-
-
-# @app.route('/<country>/<year>')
-# def get_prediction(country, year):
-#     # return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
-#     country_data = original_data[country]
-#     for yearc in country_data:
-#         if(yearc==year):
-#             return str(original_data[country][year])+" degree celsius for "+country+" for the "+str(year)
-#     return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
 
 port = int(os.getenv('VCAP_APP_PORT', 8080))
 

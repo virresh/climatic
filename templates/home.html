@@ -21,6 +21,23 @@
     All js files above are for imported because of this one js file only.
     -->
     <div id="myDiv"></div>
+    <select id="selected_year">
+      <option value="1800">1800</option>
+      <option value="1900">1900</option>
+      <option value="1950">1950</option>
+      <option value="2000">2000</option>
+      <option value="2013">2013</option>
+      <option value="2025">2025</option>
+      <option value="2050">2050</option>
+    </select>
+    <button onclick="happy_now()">Go To Selected Year !</button>
     <script type="text/javascript" src="{{ url_for('static', filename='js/plotly_inter_graph.js') }}"></script>
+    <script type="text/javascript">
+        function happy_now() {
+            e = document.getElementById("selected_year");
+            y = e.options[e.selectedIndex].value;
+            location.href = '/show/'+y;
+        };
+    </script>
 </body>
 </html>
