@@ -28,6 +28,24 @@ for year in years:
         if(i in real_dict[country]):
             yearwise_data[i][country]=real_dict[country][i]
 
-# print(yearwise_data['2000'])
+# print(yearwise_data['2013'])
 with open('./yearwise_data.json','w') as fp:
     json.dump(yearwise_data, fp)
+
+# print(yearwise_data['1900'])
+
+for country in yearwise_data['2013']:
+    yearwise_data['2013'][country]+=10
+
+CSV_data_2013=[]
+# CSV_data_1800
+for country in yearwise_data['2013']:
+    new_dict={}
+    new_dict['country']=country
+    new_dict['temp']=yearwise_data['2013'][country]
+    CSV_data_2013.append(new_dict)
+    
+
+with open('./yearwise_CSV_2050.json','w') as fp:
+    json.dump(CSV_data_2013,fp)
+
