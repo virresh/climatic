@@ -11,9 +11,6 @@ import csv
 import urllib
 import pickle
 
-
-pickle_in = open("data","rb")
-original_data = pickle.load(pickle_in)
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'WHY_SO_MUCH_TORTURE?')
 
@@ -28,16 +25,21 @@ def home_page():
     countries.pop(0)
     p.extend(countries)
     years = [2016, 2017, 2018]
-    return render_template('evs.html', years=years, countries=p)
+    return render_template('home.html', greeting=2020, years=years, countries=p)
 
-@app.route('/<country>/<year>')
-def get_prediction(country, year):
-    # return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
-    country_data = original_data[country]
-    for yearc in country_data:
-        if(yearc==year):
-            return str(original_data[country][year])+" degree celsius for "+country+" for the "+str(year)
-    return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
+@app.route('/<year>')
+def get_pred(year):
+    location = ''
+    return year
+
+# @app.route('/<country>/<year>')
+# def get_prediction(country, year):
+#     # return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
+#     country_data = original_data[country]
+#     for yearc in country_data:
+#         if(yearc==year):
+#             return str(original_data[country][year])+" degree celsius for "+country+" for the "+str(year)
+#     return str(random.randint(30, 50))+" degree celsius for "+country+" for the "+str(year)
 
 port = int(os.getenv('VCAP_APP_PORT', 8080))
 
